@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, session
 import random
+import os  # Needed for Render
 
 app = Flask(__name__)
 app.secret_key = "supersecretkey123"
@@ -51,6 +52,7 @@ def home():
 
     return render_template("index.html", message=message, hint=hint)
 
-# IMPORTANT FOR REPLIT
+# RENDER-READY: use PORT from environment
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=81)
+    port = int(os.environ.get("PORT", 5000))  # Render provides the PORT
+    app.run(host="0.0.0.0", port=port)
